@@ -1,0 +1,33 @@
+---
+title: "gggibbous: Moon charts, a pie chart alternative for two groups"
+author: "Michael Bramson"
+date: "October 27, 2019"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{gggibbous}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+<style>
+img {
+  border: none;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>")
+
+required <- c("maps", "mapproj", "knitr")
+if (!all(sapply(required, requireNamespace, quietly = TRUE))) {
+  knitr::opts_chunk$set(eval = FALSE)
+}
+```
+
+```{r, child = 'gggibbous-content.txt'}
+```
