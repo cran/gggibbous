@@ -1,4 +1,4 @@
-## ---- include = FALSE----------------------------------------------------
+## ---- include = FALSE---------------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>")
@@ -8,7 +8,7 @@ if (!all(sapply(required, requireNamespace, quietly = TRUE))) {
   knitr::opts_chunk$set(eval = FALSE)
 }
 
-## ---- echo = FALSE, fig.width = 3, fig.height = 1.5----------------------
+## ---- echo = FALSE, fig.width = 3, fig.height = 1.5---------------------------
 ggplot2::ggplot(
   data.frame(
     y = c(1, 3), group = c("a", "b"),
@@ -30,24 +30,24 @@ ggplot2::ggplot(
   ggplot2::scale_fill_manual(values = c("white", "black"), guide = "none") +
   ggplot2::theme_void(16)
 
-## ----setup---------------------------------------------------------------
+## ----setup--------------------------------------------------------------------
 library(gggibbous)
 
-## ---- fig.width = 4, fig.height = 2--------------------------------------
+## ---- fig.width = 4, fig.height = 2-------------------------------------------
 ggplot(data.frame(x = 1:5, y = 1, size = 2^(0:4)), aes(x, y, size = size)) +
   geom_moon() +
   geom_point(y = 2) +
   lims(x = c(0.5, 5.5), y = c(0.5, 2.5)) +
   scale_size(range = c(5, 10))
 
-## ---- fig.width = 5, fig.height = 1.25-----------------------------------
+## ---- fig.width = 5, fig.height = 1.25----------------------------------------
 ggplot(data.frame(x = 1:5, y = 0, ratio = 0:4 * 0.25), aes(x = x, y = y)) +
   geom_moon(aes(ratio = ratio), size = 20, fill = "black") +
   geom_text(aes(y = y + 1, label = ratio)) +
   lims(x = c(0.5, 5.5), y = c(-1, 1.4)) +
   theme_void()
 
-## ---- fig.width = 3.5, fig.height = 2.5----------------------------------
+## ---- fig.width = 3.5, fig.height = 2.5---------------------------------------
 tidymoons <- data.frame(
   x = rep(1:3, 6),
   y = rep(rep(3:1, each = 3), 2),
@@ -59,7 +59,7 @@ ggplot(tidymoons) +
   geom_moon(aes(x, y, ratio = ratio, right = right, fill = right)) +
   lims(x = c(0.5, 3.5), y = c(0.5, 3.5))
 
-## ---- fig.width = 3.5, fig.height = 2.5----------------------------------
+## ---- fig.width = 3.5, fig.height = 2.5---------------------------------------
 ggplot(tidymoons, aes(x, y, ratio = ratio, right = right, size = 2^x)) +
   geom_moon(data = subset(tidymoons, right), fill = "violetred") +
   geom_moon(
@@ -69,7 +69,7 @@ ggplot(tidymoons, aes(x, y, ratio = ratio, right = right, size = 2^x)) +
   lims(x = c(0.5, 3.5), y = c(0.5, 3.5)) +
   scale_size("size", range = c(5, 10), breaks = 2^(1:3))
 
-## ---- fig.width = 4.5, fig.height = 2.5----------------------------------
+## ---- fig.width = 4.5, fig.height = 2.5---------------------------------------
 ggplot(tidymoons) +
   geom_moon(
     aes(x, y, ratio = ratio, right = right, fill = right, size = 2^x),
@@ -80,7 +80,7 @@ ggplot(tidymoons) +
   scale_fill_manual(values = c("firebrick1", "dodgerblue2")) +
   theme(legend.box = "horizontal")
 
-## ---- fig.width = 6, fig.height = 5.45-----------------------------------
+## ---- fig.width = 6, fig.height = 5.45----------------------------------------
 dmeladh_adj <- dmeladh
 dmeladh_adj$long <- dmeladh$Longitude + c(
   -2, 0, -2, 2, -3, 3, 3, 2, 3, 4, -2.5, -2.5, -1, -2, -2.5, -4, 2.5,
@@ -118,7 +118,7 @@ moonmap +
     fill = "forestgreen", color = "forestgreen"
   )
 
-## ---- fig.width = 6, fig.height = 5.45-----------------------------------
+## ---- fig.width = 6, fig.height = 5.45----------------------------------------
 tidyadh <- reshape(
   dmeladh_adj,
   varying = c("AdhF", "AdhS"),
@@ -139,7 +139,7 @@ moonmap +
   scale_fill_manual(values = c("forestgreen", "gold")) +
   scale_color_manual(values = c("forestgreen", "gold"))
 
-## ---- fig.width = 7, fig.height = 3.5------------------------------------
+## ---- fig.width = 7, fig.height = 3.5-----------------------------------------
 moonphase <- subset(lunardist, !is.na(phase))
 moonphase$percent <- ifelse(
   moonphase$phase == "new", 0, ifelse(moonphase$phase == "full", 1, 0.5))
@@ -153,7 +153,7 @@ ggplot(lunardist, aes(date, distance)) +
     size = 5, fill = "yellow", right = moonphase$phase == "first quarter"
   )
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 rest_names <- c(
   "Anscombe's Luncheonette", "Chai Squared", "Tukey's Honest Southern Diner",
   "Bagels ANOVA", "Spearmint Row"
@@ -166,10 +166,10 @@ restaurants <- data.frame(
   Price = c(4, 5, 2, 5, 2)
 )
 
-## ---- echo = FALSE-------------------------------------------------------
+## ---- echo = FALSE------------------------------------------------------------
 knitr::kable(restaurants, align = "lcccc")
 
-## ---- fig.width = 4.5, fig.height = 3------------------------------------
+## ---- fig.width = 4.5, fig.height = 3-----------------------------------------
 # First we reshape the data into "long" format to facilitate plotting
 rest_cats <- c("Food", "Decor", "Service", "Price")
 tidyrest <- reshape(
@@ -189,7 +189,7 @@ ggplot(tidyrest, aes(0, 0)) +
   theme_minimal() +
   theme(
     panel.grid = element_blank(),
-    strip.text.y = element_text(angle = 180, hjust = 1),
+    strip.text.y.left = element_text(angle = 0, hjust = 1),
     axis.text = element_blank(),
     axis.title = element_blank()
   )
